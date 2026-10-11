@@ -1,0 +1,330 @@
+[
+  {
+    "id": "medina",
+    "cat": "culture",
+    "zone": "city",
+    "lat": 34.215,
+    "lon": -4.01,
+    "name": {
+      "fr": "Médina de Haute Taza",
+      "en": "Haute Taza old town (medina)",
+      "ar": "المدينة العتيقة بتازة العليا"
+    },
+    "d": {
+      "fr": "La vieille ville de Taza, perchée sur un éperon, surveille le couloir stratégique entre le Rif et le Moyen Atlas. Ruelles, mosquées, quartiers anciens et fortifications racontent une longue histoire de ville de passage et de garnison.",
+      "en": "Taza's old town sits on a spur above the strategic corridor between the Rif and the Middle Atlas. Its lanes, mosques, historic quarters and fortifications tell the story of a long-standing crossroads and garrison town.",
+      "ar": "تقع المدينة العتيقة بتازة على نتوء مرتفع يشرف على الممر الاستراتيجي بين الريف والأطلس المتوسط. تحكي أزقتها ومساجدها وأحياؤها القديمة وتحصيناتها تاريخًا طويلًا لمدينة عبور وحامية عسكرية."
+    },
+    "tip": {
+      "fr": "Prévoir 2 à 3 h à pied et de bonnes chaussures : les ruelles sont en pente.",
+      "en": "Allow 2–3 hours on foot and wear good shoes: the lanes are steep.",
+      "ar": "خصّص ساعتين إلى ثلاث للمشي وانتعل حذاءً مريحًا؛ فالأزقة منحدرة."
+    },
+    "kw": [
+      "medina",
+      "vieille ville",
+      "old town",
+      "haute taza",
+      "المدينة العتيقة",
+      "العتيقة",
+      "ruelles",
+      "centre historique",
+      "history",
+      "histoire",
+      "تاريخ"
+    ]
+  },
+  {
+    "id": "grande-mosquee",
+    "cat": "culture",
+    "zone": "city",
+    "lat": 34.2147,
+    "lon": -4.0094,
+    "name": {
+      "fr": "Grande Mosquée de Taza",
+      "en": "Great Mosque of Taza",
+      "ar": "الجامع الكبير بتازة"
+    },
+    "d": {
+      "fr": "Fondée à l'époque almohade au XIIe siècle puis agrandie par les Mérinides, elle compte parmi les monuments majeurs de la ville. Elle abrite un grand lustre ancien, souvent cité parmi ses curiosités. L'accès à l'intérieur peut être réservé aux fidèles : respecter les consignes sur place.",
+      "en": "Founded under the Almohads in the 12th century and later enlarged by the Marinids, it is one of the city's major monuments. It houses a large historic chandelier often cited among its curiosities. Access inside may be reserved for worshippers: follow on-site instructions.",
+      "ar": "أُسّس في العهد الموحدي خلال القرن الثاني عشر ثم وسّعه المرينيون، وهو من أبرز معالم المدينة. يضم ثريا قديمة كبيرة كثيرًا ما تُذكر بين طرائفه. قد يقتصر دخوله على المصلين، فالرجاء احترام التعليمات في عين المكان."
+    },
+    "tip": {
+      "fr": "Tenue sobre et discrétion aux heures de prière.",
+      "en": "Dress modestly and be discreet during prayer times.",
+      "ar": "ارتدِ لباسًا محتشمًا والتزم الهدوء في أوقات الصلاة."
+    },
+    "kw": [
+      "mosquee",
+      "grande mosquee",
+      "great mosque",
+      "mosque",
+      "lustre",
+      "chandelier",
+      "almohade",
+      "almohad",
+      "merinide",
+      "marinid",
+      "الجامع",
+      "مسجد",
+      "ثريا"
+    ]
+  },
+  {
+    "id": "mosquee-andalous",
+    "cat": "culture",
+    "zone": "city",
+    "lat": 34.2153,
+    "lon": -4.0108,
+    "name": {
+      "fr": "Mosquée des Andalous",
+      "en": "Andalusian Mosque",
+      "ar": "جامع الأندلس"
+    },
+    "d": {
+      "fr": "Mosquée historique de la vieille ville, dont le nom rappelle les liens anciens entre Taza et al-Andalus. Son architecture sobre s'inscrit dans le tissu du quartier ancien. Informations historiques précises à valider avec la délégation du tourisme.",
+      "en": "Historic mosque of the old town, whose name recalls the long-standing ties between Taza and al-Andalus. Its sober architecture blends into the old quarter. Precise historical details to be validated with the tourism delegation.",
+      "ar": "مسجد تاريخي بالمدينة العتيقة، يذكّر اسمه بالروابط القديمة بين تازة والأندلس. تندمج عمارته البسيطة في نسيج الحي القديم. التفاصيل التاريخية الدقيقة تحتاج إلى مراجعة مع المندوبية السياحية."
+    },
+    "tip": {
+      "fr": "À visiter de l'extérieur, en parcourant la médina.",
+      "en": "Best seen from the outside while walking through the medina.",
+      "ar": "تُشاهد من الخارج أثناء جولة في المدينة العتيقة."
+    },
+    "kw": [
+      "andalous",
+      "andalusian",
+      "andalus",
+      "الأندلس",
+      "جامع الأندلس",
+      "mosquee",
+      "mosque"
+    ]
+  },
+  {
+    "id": "remparts",
+    "cat": "culture",
+    "zone": "city",
+    "lat": 34.2162,
+    "lon": -4.0082,
+    "name": {
+      "fr": "Remparts et Bab Er-Rih",
+      "en": "Ramparts and Bab Er-Rih",
+      "ar": "الأسوار وباب الريح"
+    },
+    "d": {
+      "fr": "Les remparts et les portes de la vieille ville témoignent de la fonction défensive de Taza. Bab Er-Rih, « la porte du vent », est l'une des portes les plus connues. Le tracé des murs offre de beaux points de vue sur la ville et la plaine.",
+      "en": "The ramparts and gates of the old town reflect Taza's defensive role. Bab Er-Rih, 'the Gate of the Wind', is one of the best-known gates. The wall circuit offers good views over the city and the plain.",
+      "ar": "تشهد الأسوار والأبواب على الدور الدفاعي لتازة. ويُعد باب الريح من أشهر أبوابها. ويتيح مسار الأسوار إطلالات جميلة على المدينة والسهل."
+    },
+    "tip": {
+      "fr": "Lumière idéale en fin d'après-midi pour les photos.",
+      "en": "Late afternoon gives the best light for photos.",
+      "ar": "وقت العصر هو الأنسب للتصوير."
+    },
+    "kw": [
+      "rempart",
+      "remparts",
+      "bab er rih",
+      "bab rih",
+      "porte",
+      "gate",
+      "wall",
+      "ramparts",
+      "باب الريح",
+      "سور",
+      "أسوار",
+      "photo",
+      "تصوير"
+    ]
+  },
+  {
+    "id": "bastion",
+    "cat": "culture",
+    "zone": "city",
+    "lat": 34.2128,
+    "lon": -4.0068,
+    "name": {
+      "fr": "Bastion saadien",
+      "en": "Saadian bastion",
+      "ar": "البرج السعدي"
+    },
+    "d": {
+      "fr": "Ancien bastion d'artillerie à l'extrémité de la vieille ville, généralement attribué à l'époque saadienne (XVIe siècle). Il domine la plaine et rappelle le rôle militaire de Taza. Datation à confirmer.",
+      "en": "Former artillery bastion at the edge of the old town, generally attributed to the Saadian period (16th century). It overlooks the plain and recalls Taza's military role. Dating to be confirmed.",
+      "ar": "برج مدفعي قديم في طرف المدينة العتيقة، يُنسب عادة إلى العهد السعدي (القرن السادس عشر). يطل على السهل ويذكّر بالدور العسكري لتازة. التأريخ يحتاج إلى تأكيد."
+    },
+    "tip": {
+      "fr": "Point de vue panoramique : à combiner avec les remparts.",
+      "en": "Panoramic viewpoint: combine with the ramparts.",
+      "ar": "نقطة إطلالة بانورامية: يُفضل ربطها بزيارة الأسوار."
+    },
+    "kw": [
+      "bastion",
+      "saadien",
+      "saadian",
+      "borj",
+      "canon",
+      "cannon",
+      "البرج",
+      "سعدي",
+      "vue",
+      "view",
+      "panorama"
+    ]
+  },
+  {
+    "id": "ras-el-ma",
+    "cat": "nature",
+    "zone": "city",
+    "lat": 34.2108,
+    "lon": -4.0155,
+    "name": {
+      "fr": "Cascades de Ras El Ma",
+      "en": "Ras El Ma waterfalls",
+      "ar": "شلالات رأس الماء"
+    },
+    "d": {
+      "fr": "Sources et cascades à proximité de la ville, lieu de promenade apprécié des habitants. Le site est plus spectaculaire après les pluies, en hiver et au printemps. Idéal pour une pause fraîcheur en fin de visite.",
+      "en": "Springs and waterfalls close to the city, a favourite spot for locals to stroll. The site is most impressive after rainfall, in winter and spring. A refreshing stop at the end of a visit.",
+      "ar": "عيون وشلالات قريبة من المدينة، وهي وجهة مفضلة للتنزه عند السكان. يكون المنظر أروع بعد الأمطار في الشتاء والربيع. محطة منعشة في ختام الزيارة."
+    },
+    "tip": {
+      "fr": "Chaussures qui accrochent : les abords peuvent être glissants.",
+      "en": "Wear grippy shoes: the surroundings can be slippery.",
+      "ar": "انتعل حذاءً غير زلق؛ فقد تكون المحيطات زلقة."
+    },
+    "kw": [
+      "ras el ma",
+      "cascade",
+      "cascades",
+      "waterfall",
+      "source",
+      "spring",
+      "رأس الماء",
+      "شلال",
+      "شلالات",
+      "eau",
+      "water"
+    ]
+  },
+  {
+    "id": "tazekka",
+    "cat": "nature",
+    "zone": "park",
+    "lat": 34.095,
+    "lon": -4.125,
+    "name": {
+      "fr": "Parc national de Tazekka",
+      "en": "Tazekka National Park",
+      "ar": "المنتزه الوطني لتازكة"
+    },
+    "d": {
+      "fr": "Créé en 1950, le parc couvre environ 6 800 hectares de forêts de chênes et de cèdres, de gorges, de cascades et de gouffres. Le Jbel Tazekka culmine à environ 1 980 m. Printemps et automne sont les meilleures saisons ; la neige peut recouvrir les hauteurs en hiver.",
+      "en": "Created in 1950, the park covers about 6,800 hectares of oak and cedar forest, gorges, waterfalls and caves. Jbel Tazekka rises to roughly 1,980 m. Spring and autumn are the best seasons; snow can cover the heights in winter.",
+      "ar": "أُحدث المنتزه سنة 1950، ويمتد على نحو 6800 هكتار من غابات البلوط والأرز والمضايق والشلالات والمغارات. ويبلغ علو جبل تازكة نحو 1980 مترًا. الربيع والخريف أفضل فصلين للزيارة، وقد تغطي الثلوج المرتفعات شتاءً."
+    },
+    "tip": {
+      "fr": "Prévoir eau, couches chaudes et vérifier la météo avant de partir.",
+      "en": "Bring water and warm layers, and check the weather before leaving.",
+      "ar": "احمل الماء وملابس دافئة وتحقق من الطقس قبل الانطلاق."
+    },
+    "kw": [
+      "tazekka",
+      "tazeka",
+      "parc",
+      "park",
+      "randonnee",
+      "hiking",
+      "hike",
+      "cedre",
+      "cedar",
+      "nature",
+      "forest",
+      "foret",
+      "saison",
+      "season",
+      "meilleure",
+      "best",
+      "تازكة",
+      "منتزه",
+      "غابة",
+      "تنزه",
+      "جبل",
+      "موسم",
+      "فصل"
+    ]
+  },
+  {
+    "id": "friouato",
+    "cat": "nature",
+    "zone": "park",
+    "lat": 34.11,
+    "lon": -4.145,
+    "name": {
+      "fr": "Gouffre de Friouato",
+      "en": "Friouato Cave",
+      "ar": "مغارة فريواطو"
+    },
+    "d": {
+      "fr": "L'un des gouffres les plus profonds et les plus spectaculaires du Maroc, dans le parc de Tazekka. Un long escalier, de l'ordre de 1 800 marches selon les sources, mène à de vastes salles souterraines. L'air y est frais et humide.",
+      "en": "One of Morocco's deepest and most spectacular caves, in Tazekka park. A long staircase, around 1,800 steps according to some sources, leads to vast underground chambers. The air is cool and damp.",
+      "ar": "من أعمق المغارات وأروعها بالمغرب، داخل منتزه تازكة. يؤدي سلم طويل، يبلغ نحو 1800 درجة حسب بعض المصادر، إلى قاعات واسعة تحت الأرض. الهواء فيه بارد ورطب."
+    },
+    "tip": {
+      "fr": "Chaussures à semelles adhérentes, lampe et veste. Vérifier horaires et conditions d'accès sur place.",
+      "en": "Grippy shoes, a torch and a jacket. Check opening hours and access conditions on site.",
+      "ar": "حذاء غير زلق ومصباح وسترة. تحقق من المواعيد وشروط الولوج في عين المكان."
+    },
+    "kw": [
+      "friouato",
+      "gouffre",
+      "grotte",
+      "cave",
+      "caves",
+      "speleo",
+      "spéléo",
+      "فريواطو",
+      "مغارة",
+      "كهف",
+      "escalier",
+      "stairs"
+    ]
+  },
+  {
+    "id": "dayet-chiker",
+    "cat": "nature",
+    "zone": "park",
+    "lat": 34.085,
+    "lon": -4.1,
+    "name": {
+      "fr": "Lac Dayet Chiker",
+      "en": "Dayet Chiker lake",
+      "ar": "ضاية الشيكر"
+    },
+    "d": {
+      "fr": "Petit plan d'eau niché dans le parc de Tazekka, apprécié pour la promenade, le pique-nique et l'observation des oiseaux. Le cadre est le plus agréable au printemps, quand le niveau d'eau est élevé. Informations d'accès à valider.",
+      "en": "A small lake nestled in Tazekka park, popular for walking, picnics and birdwatching. It is at its best in spring when water levels are high. Access details to be validated.",
+      "ar": "بحيرة صغيرة وسط منتزه تازكة، يقصدها الزوار للتنزه والنزهة والتأمل في الطيور. ويكون المكان أجمل في الربيع حين يرتفع منسوب الماء. تفاصيل الولوج تحتاج إلى مراجعة."
+    },
+    "tip": {
+      "fr": "Apporter son pique-nique et rapporter ses déchets.",
+      "en": "Bring a picnic and take your waste back with you.",
+      "ar": "أحضر طعامك وأعد نفاياتك معك."
+    },
+    "kw": [
+      "dayet",
+      "chiker",
+      "lac",
+      "lake",
+      "oiseaux",
+      "birds",
+      "pique-nique",
+      "picnic",
+      "ضاية",
+      "الشيكر",
+      "بحيرة"
+    ]
+  }
+]

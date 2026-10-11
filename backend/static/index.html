@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RihlaAI — Taza Smart Tourism</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Noto+Sans+Arabic:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#f6f2ea;--card:#fffdf8;--ink:#1d2a24;--muted:#66736b;--line:#e4ddcf;
+  --green:#1f6b4f;--green-soft:#dcebe3;--green-ink:#1a5740;
+  --terra:#b8573a;--terra-soft:#f4e0d8;--terra-ink:#8f3f27;
+  --ubg:#1f6b4f;--uink:#fff;--map:#efe9dc;--park:#cfe3d6;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 6px 18px rgba(40,50,40,.06);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111a16;--card:#18231e;--ink:#e8efe9;--muted:#98a79d;--line:#2a3831;
+    --green:#4fae88;--green-soft:#21382e;--green-ink:#8fd3b4;
+    --terra:#e08a6d;--terra-soft:#3a2720;--terra-ink:#f0b29c;
+    --ubg:#2c7a5c;--uink:#fff;--map:#1d2822;--park:#24382e;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111a16;--card:#18231e;--ink:#e8efe9;--muted:#98a79d;--line:#2a3831;
+  --green:#4fae88;--green-soft:#21382e;--green-ink:#8fd3b4;
+  --terra:#e08a6d;--terra-soft:#3a2720;--terra-ink:#f0b29c;
+  --ubg:#2c7a5c;--uink:#fff;--map:#1d2822;--park:#24382e;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+[dir=rtl] body{font-family:"Noto Sans Arabic",system-ui,sans-serif}
+button{font:inherit;color:inherit}
+#app{height:100%;max-width:760px;margin:0 auto;display:flex;flex-direction:column;background:var(--bg)}
+header{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.logo{width:36px;height:36px;border-radius:11px;background:var(--green);color:#fff;display:grid;place-items:center;flex:none}
+h1{font:700 20px/1.1 Fraunces,Georgia,serif;margin:0;display:flex;align-items:center;gap:8px}
+h1 small{font:600 10px/1 system-ui,sans-serif;background:var(--terra-soft);color:var(--terra-ink);padding:3px 6px;border-radius:6px;letter-spacing:.04em}
+.tag{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.langs{display:flex;gap:4px;flex:none}
+.langs button{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:5px 9px;font-size:13px;cursor:pointer}
+.langs button.on{background:var(--green);border-color:var(--green);color:#fff}
+main{flex:1;min-height:0;overflow:auto}
+.pad{padding:16px;display:flex;flex-direction:column;gap:14px}
+nav{display:flex;border-top:1px solid var(--line);background:var(--card)}
+nav button{flex:1;border:0;background:none;padding:9px 2px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--muted);cursor:pointer}
+nav button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button.on{color:var(--green)}
+h2{font:700 20px/1.2 Fraunces,Georgia,serif;margin:0}
+h3{font:700 17px/1.25 Fraunces,Georgia,serif;margin:0}
+[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3{font-family:"Noto Sans Arabic",Fraunces,serif}
+p{margin:0}
+.muted{color:var(--muted);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.row{display:flex;gap:8px;align-items:center}
+.wrap{flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--card);padding:8px 12px;border-radius:999px;font-size:14px;cursor:pointer;line-height:1.2;text-align:start}
+.chip.on{background:var(--green-soft);border-color:var(--green);color:var(--green-ink)}
+.btn{border:0;background:var(--green);color:#fff;padding:11px 16px;border-radius:12px;font-weight:600;cursor:pointer}
+.btn.alt{background:var(--card);color:var(--ink);border:1px solid var(--line);font-weight:500}
+.btn[disabled]{opacity:.55;cursor:default}
+a.btn{text-decoration:none;display:inline-block;text-align:center}
+.badge{font-size:12px;padding:2px 9px;border-radius:999px;font-weight:600}
+.badge.culture{background:var(--terra-soft);color:var(--terra-ink)}
+.badge.nature{background:var(--green-soft);color:var(--green-ink)}
+/* chat */
+.chat{height:100%;display:flex;flex-direction:column}
+.msgs{flex:1;min-height:0;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.b{max-width:90%;padding:10px 14px;border-radius:18px;overflow-wrap:anywhere}
+.b.u{align-self:flex-end;background:var(--ubg);color:var(--uink);border-end-end-radius:6px}
+.b.a{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-end-start-radius:6px}
+.srcs{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px;font-size:12px;color:var(--muted)}
+.chip.src{padding:4px 10px;font-size:12px;background:var(--green-soft);border-color:transparent;color:var(--green-ink)}
+.fb{display:flex;gap:4px;margin-top:6px}
+.fb button{border:1px solid var(--line);background:none;border-radius:8px;padding:2px 8px;cursor:pointer;opacity:.6}
+.fb button.on{opacity:1;background:var(--green-soft);border-color:var(--green)}
+.off{margin-top:6px;font-size:12px;color:var(--terra-ink)}
+.dots i{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:var(--muted);animation:bl 1.1s infinite ease-in-out}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.composer{padding:10px 16px 12px;border-top:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;gap:8px}
+.composer input{flex:1;min-width:0;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:12px 14px;font:inherit;outline:none}
+.composer input:focus{border-color:var(--green)}
+.send{width:46px;height:46px;border-radius:14px;border:0;background:var(--green);color:#fff;display:grid;place-items:center;cursor:pointer;flex:none}
+.send svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+[dir=rtl] .send svg{transform:scaleX(-1)}
+.send[disabled]{opacity:.5}
+.note{font-size:11.5px;color:var(--muted)}
+.ctx{display:flex;align-items:center;gap:8px;font-size:13px;background:var(--green-soft);color:var(--green-ink);padding:6px 10px;border-radius:10px}
+.ctx button{margin-inline-start:auto;border:0;background:none;cursor:pointer;font-size:16px;line-height:1}
+/* sites */
+.grid{display:grid;gap:12px}
+.site{display:flex;flex-direction:column;gap:6px;text-align:start;cursor:pointer;width:100%}
+.site p{font-size:14px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tip{background:var(--terra-soft);color:var(--terra-ink);padding:10px 12px;border-radius:12px;font-size:14px}
+.qr{background:#fff;padding:8px;border-radius:12px;display:inline-block;line-height:0}
+.qr svg{width:150px;height:150px}
+.link{width:100%;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 10px;font-size:12px}
+/* map */
+.map{width:100%;height:auto;display:block;border-radius:16px;border:1px solid var(--line)}
+.mbg{fill:var(--map)}
+.park{fill:var(--park)}
+.pin{cursor:pointer}
+.pin circle:first-child{fill:var(--card);stroke-width:3}
+.pin.culture circle:first-child{stroke:var(--terra)}.pin.culture .dot{fill:var(--terra)}
+.pin.nature circle:first-child{stroke:var(--green)}.pin.nature .dot{fill:var(--green)}
+.pin.sel circle:first-child{stroke-width:5}
+.plabel,.mlabel{font:600 11px system-ui,sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--map);stroke-width:4px;text-anchor:middle}
+.cluster{cursor:pointer}
+.cluster circle{fill:var(--terra)}
+.cluster text{fill:#fff;font:700 13px system-ui,sans-serif;text-anchor:middle}
+.lst{display:flex;flex-direction:column;gap:6px}
+.li{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--card);padding:10px 12px;border-radius:12px;cursor:pointer;text-align:start;width:100%}
+.li.sel{border-color:var(--green);background:var(--green-soft)}
+.dotc{width:10px;height:10px;border-radius:50%;flex:none}
+.dotc.culture{background:var(--terra)}.dotc.nature{background:var(--green)}
+/* trips */
+.tl{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;border-inline-start:2px solid var(--line);padding-inline-start:12px}
+.tl .dayh{font-weight:700;font-size:13px;color:var(--terra-ink);margin-top:6px}
+.step{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;width:100%;border:0;background:none;padding:4px 0;cursor:pointer;text-align:start}
+.step .time{font-variant-numeric:tabular-nums;color:var(--green-ink);font-weight:600;font-size:14px;min-width:46px}
+.step .nm{font-weight:600}
+.step .muted{flex-basis:100%;padding-inline-start:56px;font-size:13px}
+/* usage */
+.bar{height:8px;border-radius:6px;background:var(--green);min-width:4px}
+.stat{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;font-size:14px}
+.stat .bar{grid-column:1/-1}
+.big{font:700 30px/1 Fraunces,Georgia,serif}
+.toast{position:fixed;inset-inline:0;bottom:80px;margin:auto;width:max-content;max-width:90%;background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></div>
+      <div style="min-width:0"><h1>RihlaAI <small>MVP</small></h1><div class="tag" id="tag"></div></div>
+    </div>
+    <div class="langs" id="langs"></div>
+  </header>
+  <main id="view"></main>
+  <nav id="nav"></nav>
+</div>
+<div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+"use strict";
+/* ---------- Données pilotes (à valider avec la délégation du tourisme) ---------- */
+const SITES = [
+ {id:'medina',cat:'culture',zone:'city',lat:34.2150,lon:-4.0100,
+  name:{fr:'Médina de Haute Taza',en:'Haute Taza old town (medina)',ar:'المدينة العتيقة بتازة العليا'},
+  d:{fr:"La vieille ville de Taza, perchée sur un éperon, surveille le couloir stratégique entre le Rif et le Moyen Atlas. Ruelles, mosquées, quartiers anciens et fortifications racontent une longue histoire de ville de passage et de garnison.",
+     en:"Taza's old town sits on a spur above the strategic corridor between the Rif and the Middle Atlas. Its lanes, mosques, historic quarters and fortifications tell the story of a long-standing crossroads and garrison town.",
+     ar:"تقع المدينة العتيقة بتازة على نتوء مرتفع يشرف على الممر الاستراتيجي بين الريف والأطلس المتوسط. تحكي أزقتها ومساجدها وأحياؤها القديمة وتحصيناتها تاريخًا طويلًا لمدينة عبور وحامية عسكرية."},
+  tip:{fr:"Prévoir 2 à 3 h à pied et de bonnes chaussures : les ruelles sont en pente.",en:"Allow 2–3 hours on foot and wear good shoes: the lanes are steep.",ar:"خصّص ساعتين إلى ثلاث للمشي وانتعل حذاءً مريحًا؛ فالأزقة منحدرة."},
+  kw:['medina','vieille ville','old town','haute taza','المدينة العتيقة','العتيقة','ruelles','centre historique','history','histoire','تاريخ']},
+ {id:'grande-mosquee',cat:'culture',zone:'city',lat:34.2147,lon:-4.0094,
+  name:{fr:'Grande Mosquée de Taza',en:'Great Mosque of Taza',ar:'الجامع الكبير بتازة'},
+  d:{fr:"Fondée à l'époque almohade au XIIe siècle puis agrandie par les Mérinides, elle compte parmi les monuments majeurs de la ville. Elle abrite un grand lustre ancien, souvent cité parmi ses curiosités. L'accès à l'intérieur peut être réservé aux fidèles : respecter les consignes sur place.",
+     en:"Founded under the Almohads in the 12th century and later enlarged by the Marinids, it is one of the city's major monuments. It houses a large historic chandelier often cited among its curiosities. Access inside may be reserved for worshippers: follow on-site instructions.",
+     ar:"أُسّس في العهد الموحدي خلال القرن الثاني عشر ثم وسّعه المرينيون، وهو من أبرز معالم المدينة. يضم ثريا قديمة كبيرة كثيرًا ما تُذكر بين طرائفه. قد يقتصر دخوله على المصلين، فالرجاء احترام التعليمات في عين المكان."},
+  tip:{fr:"Tenue sobre et discrétion aux heures de prière.",en:"Dress modestly and be discreet during prayer times.",ar:"ارتدِ لباسًا محتشمًا والتزم الهدوء في أوقات الصلاة."},
+  kw:['mosquee','grande mosquee','great mosque','mosque','lustre','chandelier','almohade','almohad','merinide','marinid','الجامع','مسجد','ثريا']},
+ {id:'mosquee-andalous',cat:'culture',zone:'city',lat:34.2153,lon:-4.0108,
+  name:{fr:'Mosquée des Andalous',en:'Andalusian Mosque',ar:'جامع الأندلس'},
+  d:{fr:"Mosquée historique de la vieille ville, dont le nom rappelle les liens anciens entre Taza et al-Andalus. Son architecture sobre s'inscrit dans le tissu du quartier ancien. Informations historiques précises à valider avec la délégation du tourisme.",
+     en:"Historic mosque of the old town, whose name recalls the long-standing ties between Taza and al-Andalus. Its sober architecture blends into the old quarter. Precise historical details to be validated with the tourism delegation.",
+     ar:"مسجد تاريخي بالمدينة العتيقة، يذكّر اسمه بالروابط القديمة بين تازة والأندلس. تندمج عمارته البسيطة في نسيج الحي القديم. التفاصيل التاريخية الدقيقة تحتاج إلى مراجعة مع المندوبية السياحية."},
+  tip:{fr:"À visiter de l'extérieur, en parcourant la médina.",en:"Best seen from the outside while walking through the medina.",ar:"تُشاهد من الخارج أثناء جولة في المدينة العتيقة."},
+  kw:['andalous','andalusian','andalus','الأندلس','جامع الأندلس','mosquee','mosque']},
+ {id:'remparts',cat:'culture',zone:'city',lat:34.2162,lon:-4.0082,
+  name:{fr:'Remparts et Bab Er-Rih',en:'Ramparts and Bab Er-Rih',ar:'الأسوار وباب الريح'},
+  d:{fr:"Les remparts et les portes de la vieille ville témoignent de la fonction défensive de Taza. Bab Er-Rih, « la porte du vent », est l'une des portes les plus connues. Le tracé des murs offre de beaux points de vue sur la ville et la plaine.",
+     en:"The ramparts and gates of the old town reflect Taza's defensive role. Bab Er-Rih, 'the Gate of the Wind', is one of the best-known gates. The wall circuit offers good views over the city and the plain.",
+     ar:"تشهد الأسوار والأبواب على الدور الدفاعي لتازة. ويُعد باب الريح من أشهر أبوابها. ويتيح مسار الأسوار إطلالات جميلة على المدينة والسهل."},
+  tip:{fr:"Lumière idéale en fin d'après-midi pour les photos.",en:"Late afternoon gives the best light for photos.",ar:"وقت العصر هو الأنسب للتصوير."},
+  kw:['rempart','remparts','bab er rih','bab rih','porte','gate','wall','ramparts','باب الريح','سور','أسوار','photo','تصوير']},
+ {id:'bastion',cat:'culture',zone:'city',lat:34.2128,lon:-4.0068,
+  name:{fr:'Bastion saadien',en:'Saadian bastion',ar:'البرج السعدي'},
+  d:{fr:"Ancien bastion d'artillerie à l'extrémité de la vieille ville, généralement attribué à l'époque saadienne (XVIe siècle). Il domine la plaine et rappelle le rôle militaire de Taza. Datation à confirmer.",
+     en:"Former artillery bastion at the edge of the old town, generally attributed to the Saadian period (16th century). It overlooks the plain and recalls Taza's military role. Dating to be confirmed.",
+     ar:"برج مدفعي قديم في طرف المدينة العتيقة، يُنسب عادة إلى العهد السعدي (القرن السادس عشر). يطل على السهل ويذكّر بالدور العسكري لتازة. التأريخ يحتاج إلى تأكيد."},
+  tip:{fr:"Point de vue panoramique : à combiner avec les remparts.",en:"Panoramic viewpoint: combine with the ramparts.",ar:"نقطة إطلالة بانورامية: يُفضل ربطها بزيارة الأسوار."},
+  kw:['bastion','saadien','saadian','borj','canon','cannon','البرج','سعدي','vue','view','panorama']},
+ {id:'ras-el-ma',cat:'nature',zone:'city',lat:34.2108,lon:-4.0155,
+  name:{fr:'Cascades de Ras El Ma',en:'Ras El Ma waterfalls',ar:'شلالات رأس الماء'},
+  d:{fr:"Sources et cascades à proximité de la ville, lieu de promenade apprécié des habitants. Le site est plus spectaculaire après les pluies, en hiver et au printemps. Idéal pour une pause fraîcheur en fin de visite.",
+     en:"Springs and waterfalls close to the city, a favourite spot for locals to stroll. The site is most impressive after rainfall, in winter and spring. A refreshing stop at the end of a visit.",
+     ar:"عيون وشلالات قريبة من المدينة، وهي وجهة مفضلة للتنزه عند السكان. يكون المنظر أروع بعد الأمطار في الشتاء والربيع. محطة منعشة في ختام الزيارة."},
+  tip:{fr:"Chaussures qui accrochent : les abords peuvent être glissants.",en:"Wear grippy shoes: the surroundings can be slippery.",ar:"انتعل حذاءً غير زلق؛ فقد تكون المحيطات زلقة."},
+  kw:['ras el ma','cascade','cascades','waterfall','source','spring','رأس الماء','شلال','شلالات','eau','water']},
+ {id:'tazekka',cat:'nature',zone:'park',lat:34.0950,lon:-4.1250,
+  name:{fr:'Parc national de Tazekka',en:'Tazekka National Park',ar:'المنتزه الوطني لتازكة'},
+  d:{fr:"Créé en 1950, le parc couvre environ 6 800 hectares de forêts de chênes et de cèdres, de gorges, de cascades et de gouffres. Le Jbel Tazekka culmine à environ 1 980 m. Printemps et automne sont les meilleures saisons ; la neige peut recouvrir les hauteurs en hiver.",
+     en:"Created in 1950, the park covers about 6,800 hectares of oak and cedar forest, gorges, waterfalls and caves. Jbel Tazekka rises to roughly 1,980 m. Spring and autumn are the best seasons; snow can cover the heights in winter.",
+     ar:"أُحدث المنتزه سنة 1950، ويمتد على نحو 6800 هكتار من غابات البلوط والأرز والمضايق والشلالات والمغارات. ويبلغ علو جبل تازكة نحو 1980 مترًا. الربيع والخريف أفضل فصلين للزيارة، وقد تغطي الثلوج المرتفعات شتاءً."},
+  tip:{fr:"Prévoir eau, couches chaudes et vérifier la météo avant de partir.",en:"Bring water and warm layers, and check the weather before leaving.",ar:"احمل الماء وملابس دافئة وتحقق من الطقس قبل الانطلاق."},
+  kw:['tazekka','tazeka','parc','park','randonnee','hiking','hike','cedre','cedar','nature','forest','foret','saison','season','meilleure','best','تازكة','منتزه','غابة','تنزه','جبل','موسم','فصل']},
+ {id:'friouato',cat:'nature',zone:'park',lat:34.1100,lon:-4.1450,
+  name:{fr:'Gouffre de Friouato',en:'Friouato Cave',ar:'مغارة فريواطو'},
+  d:{fr:"L'un des gouffres les plus profonds et les plus spectaculaires du Maroc, dans le parc de Tazekka. Un long escalier, de l'ordre de 1 800 marches selon les sources, mène à de vastes salles souterraines. L'air y est frais et humide.",
+     en:"One of Morocco's deepest and most spectacular caves, in Tazekka park. A long staircase, around 1,800 steps according to some sources, leads to vast underground chambers. The air is cool and damp.",
+     ar:"من أعمق المغارات وأروعها بالمغرب، داخل منتزه تازكة. يؤدي سلم طويل، يبلغ نحو 1800 درجة حسب بعض المصادر، إلى قاعات واسعة تحت الأرض. الهواء فيه بارد ورطب."},
+  tip:{fr:"Chaussures à semelles adhérentes, lampe et veste. Vérifier horaires et conditions d'accès sur place.",en:"Grippy shoes, a torch and a jacket. Check opening hours and access conditions on site.",ar:"حذاء غير زلق ومصباح وسترة. تحقق من المواعيد وشروط الولوج في عين المكان."},
+  kw:['friouato','gouffre','grotte','cave','caves','speleo','spéléo','فريواطو','مغارة','كهف','escalier','stairs']},
+ {id:'dayet-chiker',cat:'nature',zone:'park',lat:34.0850,lon:-4.1000,
+  name:{fr:'Lac Dayet Chiker',en:'Dayet Chiker lake',ar:'ضاية الشيكر'},
+  d:{fr:"Petit plan d'eau niché dans le parc de Tazekka, apprécié pour la promenade, le pique-nique et l'observation des oiseaux. Le cadre est le plus agréable au printemps, quand le niveau d'eau est élevé. Informations d'accès à valider.",
+     en:"A small lake nestled in Tazekka park, popular for walking, picnics and birdwatching. It is at its best in spring when water levels are high. Access details to be validated.",
+     ar:"بحيرة صغيرة وسط منتزه تازكة، يقصدها الزوار للتنزه والنزهة والتأمل في الطيور. ويكون المكان أجمل في الربيع حين يرتفع منسوب الماء. تفاصيل الولوج تحتاج إلى مراجعة."},
+  tip:{fr:"Apporter son pique-nique et rapporter ses déchets.",en:"Bring a picnic and take your waste back with you.",ar:"أحضر طعامك وأعد نفاياتك معك."},
+  kw:['dayet','chiker','lac','lake','oiseaux','birds','pique-nique','picnic','ضاية','الشيكر','بحيرة']}
+];
+const SITE = id => SITES.find(s => s.id === id);
+
+const TRIPS = [
+ {id:'t1',title:{fr:'Taza historique',en:'Historic Taza',ar:'تازة التاريخية'},dur:'half',
+  steps:[{d:1,t:'09:00',s:'medina'},{d:1,t:'10:00',s:'grande-mosquee'},{d:1,t:'10:45',s:'mosquee-andalous'},{d:1,t:'11:30',s:'remparts'},{d:1,t:'12:15',s:'bastion'}]},
+ {id:'t2',title:{fr:'Nature à Tazekka',en:'Nature in Tazekka',ar:'الطبيعة في تازكة'},dur:'one',
+  steps:[{d:1,t:'09:00',s:'tazekka'},{d:1,t:'11:00',s:'dayet-chiker'},{d:1,t:'14:00',s:'friouato'},{d:1,t:'17:00',s:'ras-el-ma'}]},
+ {id:'t3',title:{fr:'Taza en 2 jours',en:'Taza in 2 days',ar:'تازة في يومين'},dur:'two',
+  steps:[{d:1,t:'09:30',s:'medina'},{d:1,t:'11:00',s:'grande-mosquee'},{d:1,t:'14:30',s:'remparts'},{d:1,t:'16:00',s:'bastion'},{d:1,t:'17:30',s:'ras-el-ma'},
+         {d:2,t:'09:00',s:'tazekka'},{d:2,t:'11:30',s:'dayet-chiker'},{d:2,t:'14:30',s:'friouato'}]}
+];
+
+/* ---------- Traductions de l'interface ---------- */
+const T = {
+ fr:{tag:"Votre compagnon de voyage à Taza",tabs:{chat:"Assistant",sites:"Sites",map:"Carte",trips:"Parcours",usage:"Usage"},
+  hello:"Bonjour, je suis RihlaAI. Posez-moi vos questions sur le patrimoine, la nature et les visites de la province de Taza.",
+  ph:"Posez votre question…",
+  sugg:["Que visiter à Taza en une demi-journée ?","Comment visiter le gouffre de Friouato ?","Quelle est la meilleure saison pour Tazekka ?","Que voir dans la vieille ville ?"],
+  note:"Réponses basées sur 9 sites pilotes. Vérifiez horaires et tarifs sur place.",
+  offline:"Mode sans IA : réponse extraite des fiches.",noinfo:"Je n'ai pas d'information fiable à ce sujet dans ma base pilote. Essayez de reformuler, ou renseignez-vous auprès de la délégation du tourisme de Taza.",
+  sources:"Sources",ctx:"Vous êtes ici :",ask:"Demander à l'assistant",onmap:"Voir sur la carte",route:"Ouvrir dans OpenStreetMap",
+  qr:"QR code de ce site",qrHelp:"À imprimer et à afficher sur place : il ouvre cette fiche.",back:"Retour",all:"Tous",culture:"Culture",nature:"Nature",
+  tips:"Conseil pratique",approx:"Positions approximatives, à géolocaliser avant le pilote.",province:"Province",city:"Ville de Taza",
+  trips:"Parcours prêts à l'emploi",gen:"Créer mon parcours",dur:"Durée",half:"½ journée",one:"1 jour",two:"2 jours",interest:"Intérêt",mix:"Mixte",go:"Générer",loading:"Je prépare votre parcours…",day:"Jour",
+  usage:"Indicateurs d'usage (sur cet appareil)",qs:"Questions posées",langs:"Langues",topSites:"Sites les plus cités ou consultés",fb:"Satisfaction",reset:"Réinitialiser",empty:"Pas encore de données.",views:"Fiches ouvertes",
+  err:"Une erreur est survenue. Réessayez.",rate:"Trop de requêtes, patientez un instant.",copyLink:"Copier le lien",copied:"Lien copié",sitesTitle:"Sites à découvrir",mapTitle:"Carte des sites"},
+ en:{tag:"Your travel companion in Taza",tabs:{chat:"Assistant",sites:"Sites",map:"Map",trips:"Trips",usage:"Usage"},
+  hello:"Hello, I'm RihlaAI. Ask me about the heritage, nature and visits of the Taza province.",
+  ph:"Ask your question…",
+  sugg:["What can I visit in Taza in half a day?","How do I visit the Friouato cave?","What is the best season for Tazekka?","What should I see in the old town?"],
+  note:"Answers are based on 9 pilot sites. Check hours and prices on site.",
+  offline:"No-AI mode: answer extracted from the site sheets.",noinfo:"I don't have reliable information on this in my pilot database. Try rephrasing, or check with the Taza tourism delegation.",
+  sources:"Sources",ctx:"You are here:",ask:"Ask the assistant",onmap:"Show on map",route:"Open in OpenStreetMap",
+  qr:"QR code for this site",qrHelp:"Print it and display it on site: it opens this page.",back:"Back",all:"All",culture:"Culture",nature:"Nature",
+  tips:"Practical tip",approx:"Approximate positions, to be geolocated before the pilot.",province:"Province",city:"Taza city",
+  trips:"Ready-made trips",gen:"Create my trip",dur:"Duration",half:"Half a day",one:"1 day",two:"2 days",interest:"Interest",mix:"Mixed",go:"Generate",loading:"Preparing your trip…",day:"Day",
+  usage:"Usage indicators (on this device)",qs:"Questions asked",langs:"Languages",topSites:"Most cited or viewed sites",fb:"Satisfaction",reset:"Reset",empty:"No data yet.",views:"Sheets opened",
+  err:"Something went wrong. Please try again.",rate:"Too many requests, please wait a moment.",copyLink:"Copy link",copied:"Link copied",sitesTitle:"Sites to discover",mapTitle:"Site map"},
+ ar:{tag:"رفيقك في السفر إلى تازة",tabs:{chat:"المساعد",sites:"المواقع",map:"الخريطة",trips:"المسارات",usage:"الاستخدام"},
+  hello:"مرحبًا، أنا رحلة AI. اسألني عن التراث والطبيعة وأماكن الزيارة في إقليم تازة.",
+  ph:"اكتب سؤالك…",
+  sugg:["ماذا أزور في تازة خلال نصف يوم؟","كيف أزور مغارة فريواطو؟","ما أفضل فصل لزيارة تازكة؟","ماذا أرى في المدينة العتيقة؟"],
+  note:"الإجابات مبنية على 9 مواقع تجريبية. تحقق من المواعيد والأسعار في عين المكان.",
+  offline:"وضع بدون ذكاء اصطناعي: إجابة مستخرجة من بطاقات المواقع.",noinfo:"لا أملك معلومات موثوقة عن هذا الموضوع في قاعدتي التجريبية. جرّب إعادة الصياغة أو استفسر لدى المندوبية السياحية بتازة.",
+  sources:"المصادر",ctx:"أنت الآن في:",ask:"اسأل المساعد",onmap:"عرض على الخريطة",route:"فتح في OpenStreetMap",
+  qr:"رمز QR لهذا الموقع",qrHelp:"للطباعة والتعليق في عين المكان: يفتح هذه البطاقة.",back:"رجوع",all:"الكل",culture:"ثقافة",nature:"طبيعة",
+  tips:"نصيحة عملية",approx:"المواقع تقريبية وتحتاج إلى تحديد دقيق قبل التجربة.",province:"الإقليم",city:"مدينة تازة",
+  trips:"مسارات جاهزة",gen:"أنشئ مساري",dur:"المدة",half:"نصف يوم",one:"يوم واحد",two:"يومان",interest:"الاهتمام",mix:"مختلط",go:"إنشاء",loading:"أجهّز مسارك…",day:"اليوم",
+  usage:"مؤشرات الاستخدام (على هذا الجهاز)",qs:"الأسئلة المطروحة",langs:"اللغات",topSites:"أكثر المواقع ذكرًا أو اطلاعًا",fb:"الرضا",reset:"إعادة تعيين",empty:"لا توجد بيانات بعد.",views:"البطاقات المفتوحة",
+  err:"حدث خطأ. أعد المحاولة.",rate:"طلبات كثيرة، انتظر قليلًا.",copyLink:"نسخ الرابط",copied:"تم نسخ الرابط",sitesTitle:"مواقع للاكتشاف",mapTitle:"خريطة المواقع"}
+};
+
+/* ---------- État & utilitaires ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = s => esc(s || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+const state = {lang:'fr',tab:'chat',siteId:null,ctx:null,msgs:[],busy:false,draft:'',
+  mapView:'province',mapSel:null,filter:'all',tripDur:'one',tripInt:'mix',trip:null,tripBusy:false};
+const L = () => T[state.lang];
+const nm = s => s.name[state.lang];
+
+try { const l = localStorage.getItem('rihla_lang'); if (l && T[l]) state.lang = l; } catch (_) {}
+
+function logEvent(e){
+  try { const a = JSON.parse(localStorage.getItem('rihla_ev') || '[]'); a.push(Object.assign({t:Date.now()}, e)); localStorage.setItem('rihla_ev', JSON.stringify(a.slice(-500))); } catch (_) {}
+}
+function getEvents(){ try { return JSON.parse(localStorage.getItem('rihla_ev') || '[]'); } catch (_) { return []; } }
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 1600); }
+const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+/* ---------- Assistant : RAG minimal (base complète en contexte) ---------- */
+function baseText(){
+  return SITES.map(s => `[${s.id}] ${s.name.fr} (${s.cat}) — ${s.d.fr} Conseil : ${s.tip.fr} || EN: ${s.d.en}`).join('\n');
+}
+function stripSrc(t){ return t.replace(/\n?\s*SOURCES?\s*:[\s\S]*$/i, '').trim(); }
+function parseAns(t){
+  const m = t.match(/SOURCES?\s*:\s*([^\n]*)\s*$/i); let src = [];
+  if (m) src = m[1].split(/[,\s;]+/).map(x => x.trim()).filter(id => SITE(id));
+  return {text: stripSrc(t), src: [...new Set(src)]};
+}
+function buildPrompt(q, hist){
+  const ctx = state.ctx && SITE(state.ctx) ? `Le visiteur consulte actuellement la fiche : ${SITE(state.ctx).name.fr} [${state.ctx}].` : 'Aucune fiche consultée.';
+  const h = hist.map(m => (m.r === 'u' ? 'Visiteur' : 'RihlaAI') + ' : ' + m.t).join('\n');
+  return `Tu es RihlaAI, assistant touristique de la province de Taza (Maroc).
+RÈGLES STRICTES :
+- Réponds UNIQUEMENT à partir de la BASE ci-dessous. N'invente aucun fait, horaire, prix ou distance.
+- Si l'information manque, dis-le simplement et conseille de vérifier sur place ou auprès de la délégation du tourisme.
+- Réponse chaleureuse et concise (120 mots maximum), dans la langue de la question du visiteur (arabe, français ou anglais ; par défaut : ${state.lang}).
+- Dernière ligne EXACTE : SOURCES: id1,id2 (ids de la BASE utilisés), ou SOURCES: none.
+
+CONTEXTE : ${ctx}
+
+BASE :
+${baseText()}
+
+HISTORIQUE :
+${h || '(aucun)'}
+
+QUESTION DU VISITEUR : ${q}`;
+}
+function localSearch(q){
+  const nq = norm(q);
+  return SITES.map(s => {
+    let sc = 0;
+    s.kw.forEach(k => { if (nq.includes(norm(k))) sc += 2; });
+    ['fr','en','ar'].forEach(l => { if (nq.includes(norm(s.name[l]))) sc += 5; });
+    return {s, sc};
+  }).filter(x => x.sc > 0).sort((a, b) => b.sc - a.sc).slice(0, 2).map(x => x.s);
+}
+function offlineAnswer(q){
+  const hits = localSearch(q), l = state.lang;
+  if (!hits.length) return {text: L().noinfo, src: []};
+  return {text: hits.map(s => `**${s.name[l]}**\n${s.d[l]}\n💡 ${s.tip[l]}`).join('\n\n'), src: hits.map(s => s.id)};
+}
+async function ask(q){
+  if (!q.trim() || state.busy) return;
+  const t = L();
+  const hist = state.msgs.filter(m => !m.err && !m.pending).slice(-6);
+  state.msgs.push({r:'u', t:q});
+  const m = {r:'a', t:'', src:[], fb:0, pending:true};
+  state.msgs.push(m); state.busy = true; render(); logEvent({k:'q', lang:state.lang});
+  try {
+    const r = await fetch('/api/chat', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({question:q, lang:state.lang, site_id:state.ctx,
+        history: hist.map(h => ({role: h.r === 'u' ? 'user' : 'assistant', content: h.t}))})});
+    if (r.status === 429) throw {code:'rate_limited'};
+    if (!r.ok) throw new Error('http ' + r.status);
+    const d = await r.json();
+    m.t = d.answer || t.noinfo; m.src = (d.sources || []).filter(id => SITE(id)); m.cid = d.chat_id; m.off = d.mode === 'extractive'; m.why = d.llm_error || '';
+  } catch (e) {
+    if (e && e.code === 'rate_limited') { m.t = t.rate; m.err = true; m.src = []; }
+    else { const o = offlineAnswer(q); m.t = o.text; m.src = o.src; m.off = true; }
+  }
+  m.src.forEach(id => logEvent({k:'src', id}));
+  m.pending = false; state.busy = false; render();
+}
+function updateLast(){
+  const el = document.querySelector('[data-last] .txt'); if (!el) return;
+  const m = state.msgs[state.msgs.length - 1]; el.innerHTML = fmt(m.t);
+  const box = $('#msgs'); if (box) box.scrollTop = box.scrollHeight;
+}
+
+/* ---------- Générateur de parcours ---------- */
+function localTrip(){
+  const n = {half:4, one:5, two:8}[state.tripDur];
+  const cult = SITES.filter(s => s.cat === 'culture'), nat = SITES.filter(s => s.cat === 'nature');
+  let pick;
+  if (state.tripInt === 'culture') pick = cult.slice(0, n);
+  else if (state.tripInt === 'nature') pick = nat.slice(0, n);
+  else if (state.tripDur === 'half') pick = cult.slice(0, n);
+  else pick = cult.slice(0, Math.ceil(n / 2)).concat(nat.slice(0, Math.floor(n / 2)));
+  const slots = ['09:00','10:30','12:00','14:30','16:00'];
+  const perDay = state.tripDur === 'two' ? Math.ceil(pick.length / 2) : pick.length;
+  return pick.map((s, i) => ({d: Math.floor(i / perDay) + 1, t: slots[i % perDay] || '17:00', s: s.id}));
+}
+async function genTrip(){
+  if (state.tripBusy) return;
+  state.tripBusy = true; state.trip = null; render();
+  const days = state.tripDur === 'two' ? 2 : 1;
+  let steps = null;
+  try {
+    const r = await fetch('/api/itinerary', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({duration: state.tripDur, interest: state.tripInt, lang: state.lang})});
+    if (!r.ok) throw 0;
+    const arr = await r.json();
+    const list = (arr && arr.steps) || [];
+    steps = list.filter(x => x && SITE(x.site)).slice(0, 10).map(x => ({d: +x.day || 1, t: String(x.time || ''), s: x.site, note: String(x.note || '')}));
+    if (!steps.length) throw 0;
+  } catch (_) { steps = localTrip(); }
+  state.trip = {title: L().gen, steps, ai: true};
+  state.tripBusy = false; render();
+}
+
+/* ---------- Carte (SVG schématique, sans fonds de carte distants) ---------- */
+const VIEWS = {province:{lon:[-4.17,-3.98], lat:[34.06,34.23]}, city:{lon:[-4.0190,-4.0040], lat:[34.2085,34.2175]}};
+function proj(v, lat, lon){
+  const W = 340, H = 300, pad = 30, [x0, x1] = v.lon, [y0, y1] = v.lat;
+  return [pad + (lon - x0) / (x1 - x0) * (W - 2 * pad), pad + (y1 - lat) / (y1 - y0) * (H - 2 * pad)];
+}
+function osmLink(s){ return `https://www.openstreetmap.org/?mlat=${s.lat}&mlon=${s.lon}#map=15/${s.lat}/${s.lon}`; }
+
+/* ---------- Vues ---------- */
+const ICON = {
+ chat:'<path d="M4 5h16v11H9l-5 4V5z"/>',
+ sites:'<path d="M3 10l9-6 9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18"/>',
+ map:'<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/>',
+ trips:'<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a3 3 0 000-6h-4a3 3 0 010-6h6"/>',
+ usage:'<path d="M5 20V10M12 20V4M19 20v-7"/>'
+};
+function renderChrome(){
+  const root = document.documentElement;
+  root.lang = state.lang; root.dir = state.lang === 'ar' ? 'rtl' : 'ltr';
+  $('#tag').textContent = L().tag;
+  $('#langs').innerHTML = [['fr','FR'],['en','EN'],['ar','ع']].map(([k, v]) => `<button data-act="lang" data-id="${k}" class="${state.lang === k ? 'on' : ''}" aria-label="${k}">${v}</button>`).join('');
+  $('#nav').innerHTML = Object.keys(ICON).map(k => `<button data-act="tab" data-id="${k}" class="${state.tab === k ? 'on' : ''}"><svg viewBox="0 0 24 24">${ICON[k]}</svg>${esc(L().tabs[k])}</button>`).join('');
+}
+function bubble(m, i, last){
+  const t = L();
+  if (m.r === 'u') return `<div class="b u"><div class="txt">${fmt(m.t)}</div></div>`;
+  const src = (m.src || []).map(id => `<button class="chip src" data-act="site" data-id="${id}">${esc(nm(SITE(id)))}</button>`).join('');
+  const fb = (!m.pending && !m.err && i >= 0) ? `<div class="fb"><button data-act="fb" data-i="${i}" data-v="1" class="${m.fb === 1 ? 'on' : ''}" aria-label="+1">👍</button><button data-act="fb" data-i="${i}" data-v="-1" class="${m.fb === -1 ? 'on' : ''}" aria-label="-1">👎</button></div>` : '';
+  const body = (m.pending && !m.t) ? '<span class="dots"><i></i><i></i><i></i></span>' : fmt(m.t);
+  return `<div class="b a"${last ? ' data-last' : ''}><div class="txt">${body}</div>${src ? `<div class="srcs"><span>${t.sources}</span>${src}</div>` : ''}${m.off ? `<div class="off">${t.offline}${m.why ? ' — ' + esc(m.why) : ''}</div>` : ''}${fb}</div>`;
+}
+function viewChat(v){
+  const t = L(), ctx = state.ctx ? SITE(state.ctx) : null;
+  let h = `<div class="chat"><div class="msgs" id="msgs">` + bubble({r:'a', t:t.hello}, -1, false);
+  state.msgs.forEach((m, i) => { h += bubble(m, i, i === state.msgs.length - 1); });
+  if (!state.msgs.length) h += `<div class="row wrap">${t.sugg.map((s, i) => `<button class="chip" data-act="sugg" data-i="${i}">${esc(s)}</button>`).join('')}</div>`;
+  h += `</div><div class="composer">`;
+  if (ctx) h += `<div class="ctx"><span>📍 ${t.ctx} <strong>${esc(nm(ctx))}</strong></span><button data-act="ctxclear" aria-label="x">✕</button></div>`;
+  h += `<div class="row"><input id="draft" type="text" maxlength="300" enterkeyhint="send" autocomplete="off" placeholder="${esc(t.ph)}" value="${esc(state.draft)}"><button class="send" data-act="send" ${state.busy ? 'disabled' : ''} aria-label="send"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div><p class="note">${t.note}</p></div></div>`;
+  v.innerHTML = h;
+  const box = $('#msgs'); if (box) box.scrollTop = box.scrollHeight;
+}
+function siteCard(s){
+  return `<button class="card site" data-act="site" data-id="${s.id}"><div class="row wrap"><span class="badge ${s.cat}">${L()[s.cat]}</span></div><h3>${esc(nm(s))}</h3><p>${esc(s.d[state.lang])}</p></button>`;
+}
+function qrSvg(url){
+  try {
+    if (typeof qrcode !== 'function') return '';
+    const q = qrcode(0, 'M'); q.addData(url); q.make();
+    let svg = ''; try { svg = q.createSvgTag({cellSize:4, margin:2, scalable:true}); } catch (_) { svg = q.createSvgTag(4, 2); }
+    return svg;
+  } catch (_) { return ''; }
+}
+function viewSites(v){
+  const t = L();
+  if (state.siteId && SITE(state.siteId)) {
+    const s = SITE(state.siteId), url = location.href.split('#')[0] + '#/site/' + s.id, qr = qrSvg(url);
+    v.innerHTML = `<div class="pad"><div><button class="chip" data-act="back">${state.lang === 'ar' ? '→' : '←'} ${t.back}</button></div>
+      <div class="row wrap"><span class="badge ${s.cat}">${t[s.cat]}</span></div>
+      <h2>${esc(nm(s))}</h2><p>${esc(s.d[state.lang])}</p>
+      <div class="tip"><strong>${t.tips}.</strong> ${esc(s.tip[state.lang])}</div>
+      <div class="row wrap"><button class="btn" data-act="asksite" data-id="${s.id}">💬 ${t.ask}</button><button class="btn alt" data-act="mapsite" data-id="${s.id}">${t.onmap}</button><a class="btn alt" href="${osmLink(s)}" target="_blank" rel="noopener">${t.route}</a></div>
+      <div class="card"><h3>${t.qr}</h3><p class="muted" style="margin:4px 0 10px">${t.qrHelp}</p>
+        ${qr ? `<div class="qr">${qr}</div>` : ''}
+        <div class="row" style="margin-top:10px"><input class="link" readonly value="${esc(url)}" aria-label="url"><button class="chip" data-act="copy" data-id="${s.id}">${t.copyLink}</button></div></div></div>`;
+    return;
+  }
+  const list = SITES.filter(s => state.filter === 'all' || s.cat === state.filter);
+  v.innerHTML = `<div class="pad"><h2>${t.sitesTitle}</h2>
+    <div class="row wrap">${['all','culture','nature'].map(f => `<button class="chip ${state.filter === f ? 'on' : ''}" data-act="filter" data-id="${f}">${t[f]}</button>`).join('')}</div>
+    <div class="grid">${list.map(siteCard).join('')}</div></div>`;
+}
+function viewMap(v){
+  const t = L(), view = state.mapView, vb = VIEWS[view];
+  const pts = SITES.filter(s => view === 'province' ? s.zone === 'park' : s.zone === 'city');
+  let svg = `<svg class="map" viewBox="0 0 340 300" role="img" aria-label="${t.mapTitle}"><rect class="mbg" width="340" height="300" rx="16"/>`;
+  if (view === 'province') {
+    const [px, py] = proj(vb, 34.095, -4.125);
+    svg += `<ellipse class="park" cx="${px}" cy="${py}" rx="96" ry="74"/><text class="mlabel" x="${px}" y="${py + 96}">${esc(nm(SITE('tazekka')))}</text>`;
+    const [cx, cy] = proj(vb, 34.2145, -4.0100), n = SITES.filter(s => s.zone === 'city').length;
+    svg += `<g class="cluster" data-act="mapview" data-id="city" transform="translate(${cx} ${cy})"><circle r="17"/><text y="5">${n}</text></g><text class="mlabel" x="${cx}" y="${cy + 34}">${esc(t.city)}</text>`;
+  }
+  pts.forEach(s => {
+    const [x, y] = proj(vb, s.lat, s.lon), sel = state.mapSel === s.id;
+    svg += `<g class="pin ${s.cat} ${sel ? 'sel' : ''}" data-act="pin" data-id="${s.id}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle r="10"/><circle class="dot" r="3.5"/>${sel ? `<text class="plabel" y="-17">${esc(nm(s))}</text>` : ''}</g>`;
+  });
+  svg += '</svg>';
+  const sel = state.mapSel ? SITE(state.mapSel) : null;
+  v.innerHTML = `<div class="pad"><h2>${t.mapTitle}</h2>
+    <div class="row wrap">${['province','city'].map(k => `<button class="chip ${view === k ? 'on' : ''}" data-act="mapview" data-id="${k}">${t[k]}</button>`).join('')}</div>
+    ${svg}<p class="note">${t.approx}</p>
+    ${sel ? `<div class="card"><div class="row wrap"><span class="badge ${sel.cat}">${t[sel.cat]}</span></div><h3 style="margin-top:6px">${esc(nm(sel))}</h3><p class="muted" style="margin:4px 0 10px">${esc(sel.d[state.lang])}</p><div class="row wrap"><button class="btn" data-act="site" data-id="${sel.id}">${t.tabs.sites}</button><button class="btn alt" data-act="asksite" data-id="${sel.id}">💬 ${t.ask}</button><a class="btn alt" href="${osmLink(sel)}" target="_blank" rel="noopener">${t.route}</a></div></div>` : ''}
+    <div class="lst">${pts.map(s => `<button class="li ${state.mapSel === s.id ? 'sel' : ''}" data-act="pin" data-id="${s.id}"><span class="dotc ${s.cat}"></span><span>${esc(nm(s))}</span></button>`).join('')}</div></div>`;
+}
+function tripHTML(title, sub, steps){
+  const t = L(), multi = new Set(steps.map(s => s.d)).size > 1; let day = 0;
+  let h = `<article class="card"><h3>${esc(title)}</h3>${sub ? `<p class="muted">${esc(sub)}</p>` : ''}<ol class="tl">`;
+  steps.forEach(st => {
+    const s = SITE(st.s); if (!s) return;
+    if (multi && st.d !== day) { day = st.d; h += `<li class="dayh">${t.day} ${day}</li>`; }
+    h += `<li><button class="step" data-act="site" data-id="${s.id}"><span class="time">${esc(st.t || '')}</span><span class="nm">${esc(nm(s))}</span>${st.note ? `<span class="muted">${esc(st.note)}</span>` : ''}</button></li>`;
+  });
+  return h + '</ol></article>';
+}
+function viewTrips(v){
+  const t = L(), chips = (act, cur, opts) => `<div class="row wrap">${opts.map(([k, lab]) => `<button class="chip ${cur === k ? 'on' : ''}" data-act="${act}" data-id="${k}">${lab}</button>`).join('')}</div>`;
+  let h = `<div class="pad"><h2>${t.trips}</h2>`;
+  h += `<div class="card" style="display:flex;flex-direction:column;gap:12px"><h3>${t.gen}</h3>
+    <div><p class="muted" style="margin-bottom:6px">${t.dur}</p>${chips('tdur', state.tripDur, [['half', t.half], ['one', t.one], ['two', t.two]])}</div>
+    <div><p class="muted" style="margin-bottom:6px">${t.interest}</p>${chips('tint', state.tripInt, [['mix', t.mix], ['culture', t.culture], ['nature', t.nature]])}</div>
+    <button class="btn" data-act="gentrip" ${state.tripBusy ? 'disabled' : ''}>${state.tripBusy ? t.loading : '✨ ' + t.go}</button></div>`;
+  if (state.trip) h += tripHTML(state.trip.title, `${t[state.tripDur]} · ${t[state.tripInt]}`, state.trip.steps);
+  TRIPS.forEach(tr => { h += tripHTML(tr.title[state.lang], t[tr.dur], tr.steps); });
+  v.innerHTML = h + '</div>';
+}
+function viewUsage(v){
+  const t = L(), ev = getEvents(), qs = ev.filter(e => e.k === 'q');
+  const langs = {fr:0, en:0, ar:0}; qs.forEach(e => { if (langs[e.lang] !== undefined) langs[e.lang]++; });
+  const cnt = {}; ev.filter(e => e.k === 'src' || e.k === 'view').forEach(e => { cnt[e.id] = (cnt[e.id] || 0) + 1; });
+  const top = Object.entries(cnt).sort((a, b) => b[1] - a[1]).slice(0, 6), maxTop = top.length ? top[0][1] : 1;
+  const up = ev.filter(e => e.k === 'fb' && e.v === 1).length, down = ev.filter(e => e.k === 'fb' && e.v === -1).length;
+  const views = ev.filter(e => e.k === 'view').length, tot = up + down;
+  const bar = (label, n, max) => `<div class="stat"><span>${esc(label)}</span><strong>${n}</strong><div class="bar" style="width:${max ? Math.max(4, n / max * 100) : 4}%"></div></div>`;
+  const maxL = Math.max(1, ...Object.values(langs));
+  v.innerHTML = `<div class="pad"><h2>${t.usage}</h2>
+    ${ev.length ? '' : `<p class="muted">${t.empty}</p>`}
+    <div class="row"><div class="card" style="flex:1"><p class="muted">${t.qs}</p><div class="big">${qs.length}</div></div><div class="card" style="flex:1"><p class="muted">${t.views}</p><div class="big">${views}</div></div><div class="card" style="flex:1"><p class="muted">${t.fb}</p><div class="big">${tot ? Math.round(up / tot * 100) + '%' : '–'}</div></div></div>
+    <div class="card" style="display:flex;flex-direction:column;gap:10px"><h3>${t.langs}</h3>${Object.entries(langs).map(([k, n]) => bar(k.toUpperCase(), n, maxL)).join('')}</div>
+    <div class="card" style="display:flex;flex-direction:column;gap:10px"><h3>${t.topSites}</h3>${top.length ? top.map(([id, n]) => bar(nm(SITE(id)), n, maxTop)).join('') : `<p class="muted">${t.empty}</p>`}</div>
+    <div><button class="btn alt" data-act="reset">${t.reset}</button></div></div>`;
+}
+function render(){
+  renderChrome();
+  const v = $('#view');
+  ({chat:viewChat, sites:viewSites, map:viewMap, trips:viewTrips, usage:viewUsage})[state.tab](v);
+}
+
+/* ---------- Événements ---------- */
+function openSite(id){ state.tab = 'sites'; state.siteId = id; state.ctx = id; logEvent({k:'view', id}); render(); $('#view').scrollTop = 0; }
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]'); if (!el) return;
+  const a = el.dataset.act, id = el.dataset.id;
+  switch (a) {
+    case 'lang': state.lang = id; try { localStorage.setItem('rihla_lang', id); } catch (_) {} render(); break;
+    case 'tab': state.tab = id; if (id !== 'sites') state.siteId = null; render(); $('#view').scrollTop = 0; break;
+    case 'site': openSite(id); break;
+    case 'back': state.siteId = null; render(); break;
+    case 'asksite': state.ctx = id; state.tab = 'chat'; render(); break;
+    case 'mapsite': { const s = SITE(id); state.mapView = s.zone === 'park' ? 'province' : 'city'; state.mapSel = id; state.siteId = null; state.tab = 'map'; render(); break; }
+    case 'ctxclear': state.ctx = null; render(); break;
+    case 'send': doSend(); break;
+    case 'sugg': ask(L().sugg[+el.dataset.i]); break;
+    case 'fb': { const m = state.msgs[+el.dataset.i], val = +el.dataset.v; if (m && !m.fb) { m.fb = val; logEvent({k:'fb', v:val}); if (m.cid) fetch('/api/feedback', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({chat_id:m.cid, value:val})}).catch(() => {}); render(); } break; }
+    case 'filter': state.filter = id; render(); break;
+    case 'pin': state.mapSel = id; render(); break;
+    case 'mapview': state.mapView = id; state.mapSel = null; render(); break;
+    case 'tdur': state.tripDur = id; render(); break;
+    case 'tint': state.tripInt = id; render(); break;
+    case 'gentrip': genTrip(); break;
+    case 'reset': try { localStorage.removeItem('rihla_ev'); } catch (_) {} render(); break;
+    case 'copy': { const url = location.href.split('#')[0] + '#/site/' + id; try { navigator.clipboard.writeText(url).then(() => toast(L().copied), () => {}); } catch (_) {} break; }
+  }
+});
+function doSend(){ const q = state.draft.trim(); if (!q || state.busy) return; state.draft = ''; ask(q); }
+document.addEventListener('input', e => { if (e.target.id === 'draft') state.draft = e.target.value; });
+document.addEventListener('keydown', e => { if (e.target.id === 'draft' && e.key === 'Enter' && !e.isComposing) { e.preventDefault(); doSend(); } });
+function applyHash(){
+  const m = location.hash.match(/^#\/site\/([\w-]+)/);
+  if (m && SITE(m[1])) { state.tab = 'sites'; state.siteId = m[1]; state.ctx = m[1]; logEvent({k:'view', id:m[1], qr:1}); }
+}
+window.addEventListener('hashchange', () => { applyHash(); render(); });
+
+applyHash();
+render();
+</script>
+</body>
+</html>
